@@ -8,9 +8,9 @@ import org.springframework.data.neo4j.core.schema.Relationship
 class Employee(@Id val id: String) {
 
     @Relationship(type = "SUPERVISED_BY", direction = Relationship.Direction.INCOMING)
-    var supervisors: Set<Employee> = emptySet()
+    var supervisors: Set<SupervisorConfig> = emptySet()
 
     @Relationship(type = "SUBORDINATES", direction = Relationship.Direction.OUTGOING)
-    var subordinates: Set<Employee> = emptySet()
+    var subordinates: Set<SupervisorConfig> = emptySet()
 
 }
