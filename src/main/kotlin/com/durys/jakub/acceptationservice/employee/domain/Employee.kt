@@ -10,7 +10,4 @@ class Employee(@Id val id: String) {
     @Relationship(type = "SUPERVISED_BY", direction = Relationship.Direction.INCOMING)
     var supervisors: Set<SupervisorConfig> = emptySet()
 
-    @Relationship(type = "SUBORDINATES", direction = Relationship.Direction.OUTGOING)
-    var subordinates: Set<SupervisorConfig> = emptySet()
-
 }
