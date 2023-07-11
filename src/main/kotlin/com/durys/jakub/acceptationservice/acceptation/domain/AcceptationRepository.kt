@@ -7,7 +7,7 @@ import java.time.LocalDate
 interface AcceptationRepository: Neo4jRepository<Employee, String> {
 
     @Query("MATCH (e:Employee) <-[supervised:SUPERVISED_BY]-(supervisor:Employee)" +
-            " where supervised.level = \$level (and \$at >= supervised.from and \$at and coalesce(supervised.to, \$at))" +
+            " where e.id = \$employeeId supervised.level = \$level (and \$at >= supervised.from and \$at and coalesce(supervised.to, \$at))" +
             " return supervisor")
-    fun acceptants(level: String, at: LocalDate)
+    fun acceptants(employeeId: String, level: Int, at: LocalDate): List<Employee>
 }
