@@ -1,4 +1,4 @@
-package com.durys.jakub.acceptationservice.employee.domain
+package com.durys.jakub.acceptationservice.acceptation.domain
 
 import org.springframework.data.neo4j.repository.Neo4jRepository
 

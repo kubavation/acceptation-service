@@ -1,4 +1,4 @@
-package com.durys.jakub.acceptationservice.employee.domain
+package com.durys.jakub.acceptationservice.acceptation.domain
 
 import org.springframework.data.neo4j.core.schema.RelationshipProperties
 import org.springframework.data.neo4j.core.schema.TargetNode
