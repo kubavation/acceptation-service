@@ -1,19 +1,26 @@
 package com.durys.jakub.acceptationservice.acceptation.infrastructure.`in`
 
+import com.durys.jakub.acceptationservice.acceptation.application.AcceptationApplicationService
 import com.durys.jakub.acceptationservice.acceptation.domain.AcceptationRepository
-import com.durys.jakub.acceptationservice.acceptation.domain.Employee
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import com.durys.jakub.acceptationservice.acceptation.infrastructure.model.AcceptationConfigDTO
+import com.durys.jakub.acceptationservice.api.EmployeeDTO
+import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
 
 @RestController
 @RequestMapping("/acceptation")
-class AcceptationController(val acceptationRepository: AcceptationRepository) {
+class AcceptationController(val acceptationRepository: AcceptationRepository,
+                            val acceptationApplicationService: AcceptationApplicationService) {
 
     @GetMapping("/employees/{employeeId}")
     fun acceptants(@PathVariable employeeId: String,
-                   @RequestParam at: LocalDate, @RequestParam level: Int): List<Employee> = acceptationRepository.acceptants(employeeId, level, at)
+                   @RequestParam at: LocalDate, @RequestParam level: Int): List<EmployeeDTO> {
+        return acceptationRepository.acceptants(employeeId, level, at)
+                .map { EmployeeDTO(it.id) }
+    }
+
+    @PatchMapping("/employees/{employeeId}")
+    fun addAcceptants(@PathVariable employeeId: String, @RequestBody config: Set<AcceptationConfigDTO>) {
+        acceptationApplicationService.addAcceptants(employeeId, config)
+    }
 }
