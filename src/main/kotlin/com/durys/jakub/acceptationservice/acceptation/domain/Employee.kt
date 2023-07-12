@@ -10,4 +10,10 @@ class Employee(@Id val id: String) {
     @Relationship(type = "SUPERVISED_BY", direction = Relationship.Direction.INCOMING)
     var supervisors: Set<SupervisorConfig> = emptySet()
 
+
+     fun withSupervisors(supervisorConfig: Set<SupervisorConfig>): Employee {
+        supervisors + supervisorConfig
+        return this
+    }
+
 }
