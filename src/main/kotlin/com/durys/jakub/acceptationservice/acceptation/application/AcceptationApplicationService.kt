@@ -16,10 +16,9 @@ class AcceptationApplicationService(val repository: AcceptationRepository) {
                         config.map { SupervisorConfig(employee(it.employeeId), it.from, it.to, it.level) }.toSet())
 
         repository.save(employee)
-
     }
 
-    fun employee(employeeId: String): Employee {
+    private fun employee(employeeId: String): Employee {
         return repository.findById(employeeId)
                 .orElse(Employee(employeeId))
     }
