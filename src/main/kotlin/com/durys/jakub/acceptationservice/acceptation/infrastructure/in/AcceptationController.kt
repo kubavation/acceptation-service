@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
 
 @RestController
-@RequestMapping("/api/acceptation")
+@RequestMapping("/acceptation")
 class AcceptationController(val acceptationRepository: AcceptationRepository) {
 
     @GetMapping("/employees/{employeeId}")
     fun acceptants(@PathVariable employeeId: String,
-                   @RequestParam at: LocalDate, @RequestParam level: Int): List<Employee> {
-        return acceptationRepository.acceptants(employeeId, level, at)
-    }
+                   @RequestParam at: LocalDate, @RequestParam level: Int): List<Employee> = acceptationRepository.acceptants(employeeId, level, at)
 }
