@@ -20,7 +20,9 @@ class AcceptationController(val acceptationRepository: AcceptationRepository,
     }
 
     @PatchMapping("/employees/{employeeId}")
-    fun addAcceptants(@PathVariable employeeId: String, @RequestBody config: Set<AcceptationConfigDTO>) {
-        acceptationApplicationService.addAcceptants(employeeId, config)
+    fun changeAcceptants(@PathVariable employeeId: String, @RequestBody config: Set<AcceptationConfigDTO>) {
+        acceptationApplicationService.changeAcceptants(employeeId, config)
     }
+
+
 }
