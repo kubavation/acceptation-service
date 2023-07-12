@@ -10,6 +10,9 @@ class AcceptationsApi(val acceptationRepository: AcceptationRepository) {
 
     @GetMapping("/employees/{employeeId}")
     fun acceptants(@PathVariable employeeId: String,
-                   @RequestParam at: LocalDate, @RequestParam level: Int) = acceptationRepository.acceptants(employeeId, level, at)
+                   @RequestParam at: LocalDate, @RequestParam level: Int): List<EmployeeDTO> {
+        return acceptationRepository.acceptants(employeeId, level, at)
+                .map { EmployeeDTO(it.id) }
+    }
 
 }
