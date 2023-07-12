@@ -11,20 +11,17 @@ class AcceptationApplicationService(val repository: AcceptationRepository) {
 
     fun addAcceptants(employeeId: String, config: Set<AcceptationConfigDTO>) {
 
-        val employee = repository.findById(employeeId)
-                .map {
-                    it.withSupervisors(
-                        config.map { SupervisorConfig(withEmployee(it.employeeId), it.from, it.to, it.level) }.toSet())
-                }
-                .orElseThrow { RuntimeException("Employee not found") }
+        val employee = employee(employeeId)
+                .withSupervisors(
+                        config.map { SupervisorConfig(employee(it.employeeId), it.from, it.to, it.level) }.toSet())
 
         repository.save(employee)
 
     }
 
-    fun withEmployee(employeeId: String): Employee {
+    fun employee(employeeId: String): Employee {
         return repository.findById(employeeId)
-                .orElse(null)
+                .orElse(Employee(employeeId))
     }
 
 }
