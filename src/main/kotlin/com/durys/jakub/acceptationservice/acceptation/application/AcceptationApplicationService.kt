@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 @Service
 class AcceptationApplicationService(val repository: AcceptationRepository) {
 
-    fun changeAcceptants(employeeId: String, config: Set<AcceptationConfigDTO>) {
+    fun changeSupervisors(employeeId: String, config: Set<AcceptationConfigDTO>) {
 
         val employee = employee(employeeId)
                 .withSupervisors(

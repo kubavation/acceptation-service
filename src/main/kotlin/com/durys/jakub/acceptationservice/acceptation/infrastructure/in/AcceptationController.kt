@@ -19,9 +19,14 @@ class AcceptationController(val acceptationRepository: AcceptationRepository,
                 .map { EmployeeDTO(it.id) }
     }
 
+    @GetMapping("/employees/{employeeId}/config")
+    fun acceptantsWithConfig(@PathVariable employeeId: String): List<EmployeeDTO> {
+        return emptyList()
+    }
+
     @PatchMapping("/employees/{employeeId}")
     fun changeAcceptants(@PathVariable employeeId: String, @RequestBody config: Set<AcceptationConfigDTO>) {
-        acceptationApplicationService.changeAcceptants(employeeId, config)
+        acceptationApplicationService.changeSupervisors(employeeId, config)
     }
 
 
