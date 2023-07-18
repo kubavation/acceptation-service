@@ -2,6 +2,8 @@ package com.durys.jakub.acceptationservice.acceptation.infrastructure.`in`
 
 import com.durys.jakub.acceptationservice.acceptation.application.AcceptationApplicationService
 import com.durys.jakub.acceptationservice.acceptation.domain.AcceptationRepository
+import com.durys.jakub.acceptationservice.acceptation.domain.Employee
+import com.durys.jakub.acceptationservice.acceptation.domain.SupervisorConfig
 import com.durys.jakub.acceptationservice.acceptation.infrastructure.model.AcceptationConfigDTO
 import com.durys.jakub.acceptationservice.api.EmployeeDTO
 import org.springframework.web.bind.annotation.*
@@ -19,9 +21,9 @@ class AcceptationController(val acceptationRepository: AcceptationRepository,
                 .map { EmployeeDTO(it.id) }
     }
 
-    @GetMapping("/employees/{employeeId}/config")
-    fun acceptantsWithConfig(@PathVariable employeeId: String): List<EmployeeDTO> {
-        return emptyList()
+    @GetMapping("/employees/{employeeId}/config/{level}")
+    fun acceptantsWithConfig(@PathVariable employeeId: String, @PathVariable level: Int): List<Employee> {
+        return acceptationApplicationService.acceptationConfig(employeeId, level);
     }
 
     @PatchMapping("/employees/{employeeId}")

@@ -18,6 +18,10 @@ class AcceptationApplicationService(val repository: AcceptationRepository) {
         repository.save(employee)
     }
 
+    fun acceptationConfig(employeeId: String, level: Int): List<Employee> {
+        return repository.supervisorConfig(employeeId, level);
+    }
+
     private fun employee(employeeId: String): Employee {
         return repository.findById(employeeId)
                 .orElse(Employee(employeeId))
